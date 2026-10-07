@@ -15,7 +15,7 @@
   <nav>
     <a href="#about">ABOUT</a>
     <a href="#modes">MODES</a>
-    <a class="nav-play" href="#beta">RELEASING SOON</a>
+    <a class="nav-play" href="#release">RELEASING SOON</a>
   </nav>
 </header>
 
@@ -25,34 +25,29 @@
       <div class="kicker">PENGUIN PLUNGE</div>
       <h1>PLUNGE<br><em>IN.</em></h1>
       <p>A chaotic penguin party game for the browser. Race, survive, and try not to fall.</p>
-      <a class="play-button" href="#beta">RELEASES IN <span id="hero-countdown">2 DAYS</span> <span>→</span></a>
+      <a class="play-button" href="#release">RELEASES IN <span id="hero-countdown">--</span> <span>→</span></a>
       <div class="under">BROWSER GAME&nbsp;&nbsp;•&nbsp;&nbsp;PENGUINS&nbsp;&nbsp;•&nbsp;&nbsp;RELEASING OCTOBER 9</div>
     </div>
 
     <div class="preview">
-      <img src="assets/penguin-preview.webp" alt="Penguin Plunge gameplay preview"
-           onerror="this.style.display='none';this.parentElement.classList.add('image-missing');">
-      <div class="image-missing-content">
-        <span>GAMEPLAY PREVIEW</span>
-        <strong>IMAGE COMING SOON</strong>
-      </div>
+      <img src="favicon.png" alt="Penguin Plunge preview">
       <div class="preview-overlay">
-        <span>RELEASING SOON</span>
+        <span>PENGUIN PLUNGE</span>
         <strong>OCTOBER 9</strong>
       </div>
     </div>
   </section>
 
-  <section class="countdown-section" id="beta">
+  <section class="countdown-section" id="release">
     <div>
       <div class="kicker">THE WAIT IS ALMOST OVER</div>
-      <h2>2 DAYS.<br>THAT'S IT.</h2>
+      <h2>RELEASE<br>COUNTDOWN.</h2>
     </div>
     <div class="countdown" aria-label="Live release countdown">
-      <div class="count-box"><strong id="days">02</strong><span>DAYS</span></div>
-      <div class="count-box"><strong id="hours">00</strong><span>HOURS</span></div>
-      <div class="count-box"><strong id="minutes">00</strong><span>MINUTES</span></div>
-      <div class="count-box"><strong id="seconds">00</strong><span>SECONDS</span></div>
+      <div class="count-box"><strong id="days">--</strong><span>DAYS</span></div>
+      <div class="count-box"><strong id="hours">--</strong><span>HOURS</span></div>
+      <div class="count-box"><strong id="minutes">--</strong><span>MINUTES</span></div>
+      <div class="count-box"><strong id="seconds">--</strong><span>SECONDS</span></div>
     </div>
   </section>
 
@@ -92,11 +87,22 @@
 </footer>
 
 <script>
-  // Release target: October 9, 2026 at 00:00 UK time (BST).
+  // One fixed release target. Everything on the page uses this same timer.
   const releaseDate = new Date("2026-10-09T00:00:00+01:00").getTime();
 
   function updateCountdown() {
-    const remaining = Math.max(0, releaseDate - Date.now());
+    const remaining = releaseDate - Date.now();
+
+    if (remaining <= 0) {
+      document.getElementById("days").textContent = "00";
+      document.getElementById("hours").textContent = "00";
+      document.getElementById("minutes").textContent = "00";
+      document.getElementById("seconds").textContent = "00";
+      document.getElementById("hero-countdown").textContent = "OUT NOW";
+      document.querySelector(".countdown-section h2").innerHTML = "WE'RE<br>LIVE.";
+      return;
+    }
+
     const totalSeconds = Math.floor(remaining / 1000);
     const days = Math.floor(totalSeconds / 86400);
     const hours = Math.floor((totalSeconds % 86400) / 3600);
@@ -108,14 +114,8 @@
     document.getElementById("minutes").textContent = String(minutes).padStart(2, "0");
     document.getElementById("seconds").textContent = String(seconds).padStart(2, "0");
 
-    const hero = document.getElementById("hero-countdown");
-    if (remaining <= 0) {
-      hero.textContent = "OUT NOW";
-      document.querySelector(".countdown-section h2").innerHTML = "WE'RE<br>LIVE.";
-      return;
-    }
-
-    hero.textContent = days > 0 ? days + (days === 1 ? " DAY" : " DAYS") : hours + " HRS";
+    document.getElementById("hero-countdown").textContent =
+      days > 0 ? days + (days === 1 ? " DAY" : " DAYS") : hours + " HRS";
   }
 
   updateCountdown();
