@@ -15,7 +15,7 @@
   <nav>
     <a href="#about">ABOUT</a>
     <a href="#modes">MODES</a>
-    <a class="nav-play" href="#beta">BETA SOON</a>
+    <a class="nav-play" href="#beta">RELEASING SOON</a>
   </nav>
 </header>
 
@@ -25,23 +25,41 @@
       <div class="kicker">PENGUIN PLUNGE</div>
       <h1>PLUNGE<br><em>IN.</em></h1>
       <p>A chaotic penguin party game for the browser. Race, survive, and try not to fall.</p>
-      <a class="play-button" href="#beta">BETA IN ~2 WEEKS <span>→</span></a>
-      <div class="under">BROWSER GAME&nbsp;&nbsp;•&nbsp;&nbsp;PENGUINS&nbsp;&nbsp;•&nbsp;&nbsp;COMING SOON</div>
+      <a class="play-button" href="#beta">RELEASES IN <span id="hero-countdown">2 DAYS</span> <span>→</span></a>
+      <div class="under">BROWSER GAME&nbsp;&nbsp;•&nbsp;&nbsp;PENGUINS&nbsp;&nbsp;•&nbsp;&nbsp;RELEASING OCTOBER 9</div>
     </div>
 
     <div class="preview">
-      <img src="https://media.discordapp.net/attachments/1548125539158724719/1555707253271560242/Screenshot_2026-10-02_172502.png?backend=b2&ex=6ac22988&is=6ac0d808&hm=b1d411138a2c63264fe81e6367df26a1b69fe87380ed45d59a38c2c57f094238&=&format=webp&quality=lossless" alt="Penguin Plunge gameplay preview">
-      <div class="preview-overlay">
-        <span>BETA COMING SOON</span>
-        <strong>STAY TUNED</strong>
+      <img src="assets/penguin-preview.webp" alt="Penguin Plunge gameplay preview"
+           onerror="this.style.display='none';this.parentElement.classList.add('image-missing');">
+      <div class="image-missing-content">
+        <span>GAMEPLAY PREVIEW</span>
+        <strong>IMAGE COMING SOON</strong>
       </div>
+      <div class="preview-overlay">
+        <span>RELEASING SOON</span>
+        <strong>OCTOBER 9</strong>
+      </div>
+    </div>
+  </section>
+
+  <section class="countdown-section" id="beta">
+    <div>
+      <div class="kicker">THE WAIT IS ALMOST OVER</div>
+      <h2>2 DAYS.<br>THAT'S IT.</h2>
+    </div>
+    <div class="countdown" aria-label="Live release countdown">
+      <div class="count-box"><strong id="days">02</strong><span>DAYS</span></div>
+      <div class="count-box"><strong id="hours">00</strong><span>HOURS</span></div>
+      <div class="count-box"><strong id="minutes">00</strong><span>MINUTES</span></div>
+      <div class="count-box"><strong id="seconds">00</strong><span>SECONDS</span></div>
     </div>
   </section>
 
   <section class="strip" id="about">
     <div class="strip-title">WELCOME TO<br>PENGUIN PLUNGE.</div>
     <div class="strip-copy">
-      <p>Penguin Plunge brings penguins into fast, chaotic game modes inspired by the party-game format you know and love. The beta is currently in development and is expected to release in around two weeks.</p>
+      <p>Penguin Plunge brings penguins into fast, chaotic game modes inspired by the party-game format you know and love. The beta is nearly here, with the release coming on October 9.</p>
       <a href="https://www.youtube.com/@penguinplungeofficial" target="_blank" rel="noopener">PENGUIN PLUNGE OFFICIAL <span>→</span></a>
     </div>
   </section>
@@ -59,10 +77,10 @@
     </div>
   </section>
 
-  <section class="strip" id="beta">
-    <div class="strip-title">BETA<br>COMING SOON.</div>
+  <section class="strip">
+    <div class="strip-title">RELEASE<br>OCTOBER 9.</div>
     <div class="strip-copy">
-      <p>The Penguin Plunge beta is expected in around two weeks. Follow the project for development updates, announcements, and the beta release.</p>
+      <p>The Penguin Plunge beta is almost here. Follow the project for development updates, announcements, and the release.</p>
       <a href="https://discord.gg/vaxBhvxuWr" target="_blank" rel="noopener">JOIN THE DISCORD <span>→</span></a>
     </div>
   </section>
@@ -72,5 +90,36 @@
   <span>PENGUIN PLUNGE</span>
   <a href="https://www.youtube.com/@penguinplungeofficial" target="_blank" rel="noopener">PENGUIN PLUNGE OFFICIAL →</a>
 </footer>
+
+<script>
+  // Release target: October 9, 2026 at 00:00 UK time (BST).
+  const releaseDate = new Date("2026-10-09T00:00:00+01:00").getTime();
+
+  function updateCountdown() {
+    const remaining = Math.max(0, releaseDate - Date.now());
+    const totalSeconds = Math.floor(remaining / 1000);
+    const days = Math.floor(totalSeconds / 86400);
+    const hours = Math.floor((totalSeconds % 86400) / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = totalSeconds % 60;
+
+    document.getElementById("days").textContent = String(days).padStart(2, "0");
+    document.getElementById("hours").textContent = String(hours).padStart(2, "0");
+    document.getElementById("minutes").textContent = String(minutes).padStart(2, "0");
+    document.getElementById("seconds").textContent = String(seconds).padStart(2, "0");
+
+    const hero = document.getElementById("hero-countdown");
+    if (remaining <= 0) {
+      hero.textContent = "OUT NOW";
+      document.querySelector(".countdown-section h2").innerHTML = "WE'RE<br>LIVE.";
+      return;
+    }
+
+    hero.textContent = days > 0 ? days + (days === 1 ? " DAY" : " DAYS") : hours + " HRS";
+  }
+
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+</script>
 </body>
 </html>
