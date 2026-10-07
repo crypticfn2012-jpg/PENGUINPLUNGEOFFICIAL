@@ -27,3 +27,16 @@ nav{display:flex;align-items:center;gap:34px;color:#aeb2ad;font-size:10px;font-w
 
 @media(max-width:850px){nav a:not(.nav-play){display:none}.hero{grid-template-columns:1fr;padding-top:55px}.preview{height:56vw;min-height:280px}.strip,.info{grid-template-columns:1fr;gap:30px}.controls{grid-template-columns:1fr 1fr}.control:nth-child(2){border-right:0}.control:nth-child(-n+2){border-bottom:1px solid var(--line)}}
 @media(max-width:520px){.nav{padding:0 18px}.logo{font-size:22px}.hero{padding:48px 18px 65px}.hero h1{font-size:94px}.preview{height:60vw}.strip,.info{padding:60px 18px}.controls{grid-template-columns:1fr}.control{border-right:0;border-bottom:1px solid var(--line)}.control:last-child{border-bottom:0}.footer{padding:24px 18px}}
+
+.countdown-section{max-width:1240px;margin:auto;padding:78px 6%;border-top:1px solid var(--line);display:grid;grid-template-columns:.7fr 1.3fr;gap:80px;align-items:center}
+.countdown-section h2{font:800 60px/.86 'Barlow Condensed';letter-spacing:-1px;margin:18px 0 0}
+.countdown{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line)}
+.count-box{padding:25px 18px;border-right:1px solid var(--line);text-align:center}
+.count-box:last-child{border-right:0}
+.count-box strong{display:block;font:900 clamp(34px,5vw,58px)/1 'Barlow Condensed';letter-spacing:-1px}
+.count-box span{display:block;margin-top:8px;color:#666c66;font-size:8px;font-weight:800;letter-spacing:1.5px}
+.image-missing-content{display:none;position:absolute;inset:0;z-index:1;align-items:center;justify-content:center;flex-direction:column;gap:10px;background:linear-gradient(135deg,#111416,#191d1f);color:#666c66;font-size:9px;font-weight:800;letter-spacing:1.5px}
+.image-missing-content strong{color:var(--blue);font-size:15px;letter-spacing:1px}
+.preview.image-missing .image-missing-content{display:flex}
+@media(max-width:850px){.countdown-section{grid-template-columns:1fr;gap:30px}}
+@media(max-width:520px){.countdown-section{padding:60px 18px}.countdown{grid-template-columns:1fr 1fr}.count-box:nth-child(2){border-right:0}.count-box:nth-child(-n+2){border-bottom:1px solid var(--line)}.count-box:nth-child(3){border-right:1px solid var(--line)}.count-box:nth-child(4){border-right:0}}
